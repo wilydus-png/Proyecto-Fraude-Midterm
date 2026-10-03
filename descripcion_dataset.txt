@@ -1,0 +1,44 @@
+DESCRIPCIÓN DEL DATASET
+============================================================
+
+Proyecto: Análisis de patrones transaccionales para el diseño y evaluación de reglas de detección de fraude en pagos electrónicos
+
+Número de registros: 1,852,394
+Número de variables procesadas: 27
+Período analizado: 2019-01-01 00:00:18 - 2020-12-31 23:59:34
+
+DISTRIBUCIÓN DE TRANSACCIONES
+------------------------------------------------------------
+Transacciones legítimas: 1,842,743
+Transacciones fraudulentas: 9,651
+Tasa global de fraude: 0.521%
+
+DESCRIPCIÓN DE VARIABLES
+------------------------------------------------------------
+trans_date_trans_time | datetime64[ns] | Fecha y hora de la transacción
+cc_num | int64 | Número identificador de la tarjeta
+merchant | object | Comercio donde se realizó la transacción
+category | object | Categoría comercial de la transacción
+amt | float64 | Monto de la transacción
+first | object | Nombre del titular
+last | object | Apellido del titular
+gender | object | Género del titular
+street | object | Dirección del titular
+city | object | Ciudad del titular
+state | object | Estado del titular
+zip | int64 | Código postal
+lat | float64 | Latitud asociada al titular
+long | float64 | Longitud asociada al titular
+city_pop | int64 | Población de la ciudad
+job | object | Ocupación del titular
+dob | datetime64[ns] | Fecha de nacimiento del titular
+trans_num | object | Identificador único de la transacción
+unix_time | int64 | Fecha y hora de la transacción en formato Unix
+merch_lat | float64 | Latitud del comercio
+merch_long | float64 | Longitud del comercio
+is_fraud | int64 | Indicador de fraude: 0 = legítima, 1 = fraudulenta
+year | int32 | Año de la transacción
+month | int32 | Mes de la transacción
+day_of_week | object | Día de la semana
+hour | int32 | Hora de la transacción
+franja_horaria | object | Franja horaria generada para el análisis
