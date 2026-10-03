@@ -1,23 +1,22 @@
-# Análisis de patrones transaccionales para la detección de fraude
+# Análisis de patrones transaccionales para el diseño y evaluación de reglas de detección de fraude en pagos electrónicos
 
 ## Proyecto Midterm – Ciencia de Datos
 
-### Descripción
+## Descripción del proyecto
 
-Este proyecto analiza patrones presentes en transacciones con tarjetas de crédito
-con el propósito de diseñar y evaluar reglas exploratorias para la detección de
-operaciones potencialmente fraudulentas.
+Este proyecto analiza patrones presentes en transacciones con tarjetas de crédito con el propósito de identificar características asociadas con operaciones fraudulentas y utilizarlas como base para el diseño y evaluación de reglas exploratorias de detección de fraude.
 
-El proceso incluye integración, limpieza, transformación, análisis exploratorio,
-visualización, almacenamiento en SQLite y evaluación de reglas mediante métricas
-de clasificación.
+El proceso comprende la adquisición, integración, limpieza, transformación, análisis exploratorio y visualización de los datos. Posteriormente, se diseñan reglas basadas en monto, horario y categoría comercial, cuyo desempeño se evalúa mediante métricas como precisión, recall, F1-Score y tasa de falsos positivos.
+
+## Objetivo
+
+Analizar los patrones transaccionales asociados con operaciones fraudulentas y evaluar reglas exploratorias que permitan identificar transacciones potencialmente fraudulentas, considerando el equilibrio entre cobertura del fraude y generación de falsos positivos.
 
 ## Fuente de datos
 
-Se utiliza el **Credit Card Transactions Fraud Detection Dataset**, publicado
-en Kaggle por Kartik Shenoy.
+Se utiliza el **Credit Card Transactions Fraud Detection Dataset**, publicado en Kaggle por Kartik Shenoy.
 
-Dataset:
+Fuente:
 https://www.kaggle.com/datasets/kartik2112/fraud-detection
 
 Los archivos originales utilizados son:
@@ -25,77 +24,125 @@ Los archivos originales utilizados son:
 - `fraudTrain.csv`
 - `fraudTest.csv`
 
-Debido a su tamaño, los archivos de datos no se incluyen en este repositorio
-y deben descargarse desde la fuente original.
+Debido a su tamaño, estos archivos no se almacenan en el repositorio. Para reproducir el análisis deben descargarse desde la fuente original y colocarse en la misma carpeta que el notebook.
 
-## Dimensiones del conjunto integrado
+## Características del conjunto de datos
 
-- Transacciones analizadas: 1,852,394
-- Transacciones legítimas: 1,842,743
-- Transacciones fraudulentas: 9,651
-- Tasa global de fraude: 0.521 %
-- Período analizado: 2019–2020
+Después de integrar los conjuntos de entrenamiento y prueba se obtuvieron:
+
+- **1.852.394 transacciones**
+- **1.842.743 transacciones legítimas**
+- **9.651 transacciones fraudulentas**
+- **Tasa global de fraude: 0,521 %**
+- **Período analizado: 2019–2020**
+
+El conjunto presenta un fuerte desbalance de clases, debido a que las operaciones fraudulentas representan una proporción reducida del total.
 
 ## Metodología
 
-El proyecto comprende las siguientes etapas:
+El proyecto se desarrolló mediante las siguientes etapas:
 
-1. Carga de los archivos originales.
-2. Integración de los conjuntos de entrenamiento y prueba.
+1. Adquisición y carga de los datos.
+2. Inspección de variables y tipos de datos.
 3. Verificación de valores nulos y registros duplicados.
-4. Eliminación de variables de índice no necesarias.
-5. Conversión de variables de fecha.
-6. Generación de variables temporales.
-7. Análisis exploratorio de patrones de fraude.
-8. Diseño de reglas exploratorias de detección.
-9. Evaluación mediante precisión, recall, F1-Score y tasa de falsos positivos.
-10. Generación de visualizaciones.
-11. Almacenamiento y consulta de datos mediante SQLite.
+4. Integración de los conjuntos `fraudTrain` y `fraudTest`.
+5. Eliminación de variables de índice no necesarias.
+6. Conversión de variables de fecha.
+7. Generación de variables temporales.
+8. Análisis exploratorio de patrones de fraude.
+9. Análisis del monto, horario y categoría comercial.
+10. Diseño de reglas exploratorias de detección.
+11. Evaluación mediante matriz de confusión y métricas de clasificación.
+12. Generación de visualizaciones.
+13. Almacenamiento y consultas mediante SQLite.
+14. Exportación del conjunto de datos procesado.
 
-## Reglas exploratorias evaluadas
+## Principales patrones identificados
 
-- **R1:** monto >= USD 200.
-- **R2:** monto >= USD 200 y horario entre 22:00 y 03:59.
-- **R3:** monto >= USD 200, horario entre 22:00 y 03:59 y categorías seleccionadas según la mayor tasa de fraude observada.
+El análisis exploratorio permitió identificar diferencias relevantes entre las operaciones legítimas y fraudulentas.
 
-Las reglas muestran diferentes relaciones entre capacidad de detección y
-generación de falsos positivos, por lo que su evaluación considera varias
-métricas y no únicamente la cantidad de fraudes identificados.
+El monto promedio de las transacciones fraudulentas fue de **USD 530,66**, mientras que en las transacciones legítimas fue de **USD 67,65**.
 
-## Principales resultados
+También se observó una mayor tasa relativa de fraude durante las horas nocturnas, principalmente entre las **22:00 y las 03:59**.
 
-| Regla | Precisión | Recall | F1-Score |
-|---|---:|---:|---:|
-| R1 | 8.38 % | 75.80 % | 15.09 % |
-| R2 | 24.70 % | 64.29 % | 35.69 % |
-| R3 | 33.38 % | 49.77 % | 39.96 % |
+Las categorías con mayores tasas de fraude observadas fueron `shopping_net`, `misc_net` y `grocery_pos`.
 
-Los resultados evidencian un intercambio entre cobertura del fraude y
-generación de falsos positivos. La incorporación progresiva de condiciones
-aumenta la precisión de las alertas, pero reduce el porcentaje total de fraudes
-detectados.
+## Visualizaciones
 
-## Archivos principales
+### Distribución de transacciones legítimas y fraudulentas
 
-- `Proyecto_Fraude_Midterm.ipynb`: desarrollo completo del análisis.
-- `descripcion_dataset.txt`: descripción y metadata de las variables.
-- `distribucion_fraude.png`: distribución de transacciones.
-- `tasa_fraude_por_hora.png`: comportamiento temporal del fraude.
-- `tasa_fraude_por_categoria.png`: tasa de fraude por categoría comercial.
-- `comparacion_reglas_precision_recall.png`: comparación de las reglas.
+![Distribución de fraude](distribucion_fraude.png)
 
-## Tecnologías utilizadas
+La distribución evidencia el fuerte desbalance del conjunto de datos: las transacciones fraudulentas representan únicamente el 0,521 % del total.
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- SQLite
-- JupyterLab
+### Tasa de fraude según la hora de la transacción
 
-## Nota
+![Tasa de fraude por hora](tasa_fraude_por_hora.png)
 
-Las reglas desarrolladas tienen un propósito académico y exploratorio. Los
-resultados corresponden exclusivamente al conjunto de datos analizado y no
-deben interpretarse como reglas universales para sistemas reales de prevención
-de fraude.
+Se observa un incremento considerable de la tasa de fraude durante las últimas horas del día y las primeras horas de la madrugada, especialmente entre las 22:00 y las 03:59.
+
+### Tasa de fraude según la categoría comercial
+
+![Tasa de fraude por categoría](tasa_fraude_por_categoria.png)
+
+Las categorías `shopping_net`, `misc_net` y `grocery_pos` presentan las mayores tasas relativas de fraude dentro del conjunto analizado.
+
+## Diseño de reglas exploratorias
+
+A partir de los patrones identificados se evaluaron tres reglas:
+
+**R1 – Monto**
+
+- Monto >= USD 200.
+
+**R2 – Monto + horario**
+
+- Monto >= USD 200.
+- Horario entre 22:00 y 03:59.
+
+**R3 – Monto + horario + categoría**
+
+- Monto >= USD 200.
+- Horario entre 22:00 y 03:59.
+- Categorías comerciales seleccionadas a partir de las mayores tasas de fraude observadas.
+
+## Evaluación de las reglas
+
+| Regla | Precisión | Recall | F1-Score | Tasa FP |
+|---|---:|---:|---:|---:|
+| R1 | 8,38 % | 75,80 % | 15,09 % | 4,34 % |
+| R2 | 24,70 % | 64,29 % | 35,69 % | 1,03 % |
+| R3 | 33,38 % | 49,77 % | 39,96 % | 0,52 % |
+
+### Comparación gráfica
+
+![Comparación de precisión y recall](comparacion_reglas_precision_recall.png)
+
+Los resultados muestran un intercambio entre cobertura y precisión. R1 detecta una mayor proporción de los fraudes, pero genera más falsos positivos. Al incorporar nuevas condiciones en R2 y R3 aumenta la precisión y disminuye la tasa de falsos positivos, aunque también se reduce el recall.
+
+Por esta razón, las reglas deben analizarse mediante varias métricas y no únicamente por la cantidad de fraudes detectados.
+
+## Almacenamiento en SQLite
+
+El conjunto de datos procesado también fue almacenado en una base de datos SQLite denominada:
+
+`fraude_transacciones.db`
+
+Se realizaron consultas SQL para verificar el número de registros y obtener estadísticas agregadas según el indicador de fraude.
+
+Debido a su tamaño, la base de datos no se incluye en el repositorio y puede ser generada nuevamente mediante la ejecución del notebook.
+
+## Estructura del repositorio
+
+```text
+Proyecto-Fraude-Midterm/
+│
+├── Proyecto_Fraude_Midterm.ipynb
+├── README.md
+├── .gitignore
+├── descripcion_dataset.txt
+│
+├── distribucion_fraude.png
+├── tasa_fraude_por_hora.png
+├── tasa_fraude_por_categoria.png
+└── comparacion_reglas_precision_recall.png
