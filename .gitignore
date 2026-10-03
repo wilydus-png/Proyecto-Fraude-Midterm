@@ -1,0 +1,12 @@
+# Datos originales
+fraudTrain.csv
+fraudTest.csv
+
+# Datos procesados
+fraude_transacciones_procesado.csv
+
+# Base de datos SQLite
+fraude_transacciones.db
+
+# Archivos temporales de Jupyter
+.ipynb_checkpoints/
