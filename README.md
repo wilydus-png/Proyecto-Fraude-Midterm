@@ -10,7 +10,7 @@ El proceso comprende la adquisición, integración, limpieza, transformación, a
 
 ## Objetivo
 
-Analizar los patrones transaccionales asociados con operaciones fraudulentas y evaluar reglas exploratorias que permitan identificar transacciones potencialmente fraudulentas, considerando el equilibrio entre cobertura del fraude y generación de falsos positivos.
+Explorar los datos transaccionales para identificar patrones asociados con operaciones fraudulentas y analizar cómo los hallazgos obtenidos mediante el EDA pueden orientar la formulación de reglas exploratorias de detección de fraude.
 
 ## Fuente de datos
 
