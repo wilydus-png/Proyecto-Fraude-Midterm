@@ -4,10 +4,8 @@
 
 ## Descripción del proyecto
 
-Este proyecto analiza patrones presentes en transacciones con tarjetas de crédito con el propósito de identificar características asociadas con operaciones fraudulentas y utilizarlas como base para el diseño y evaluación de reglas exploratorias de detección de fraude.
-
-El proceso comprende la adquisición, integración, limpieza, transformación, análisis exploratorio y visualización de los datos. Posteriormente, se diseñan reglas basadas en monto, horario y categoría comercial, cuyo desempeño se evalúa mediante métricas como precisión, recall, F1-Score y tasa de falsos positivos.
-
+Este proyecto analiza de manera exploratoria los patrones presentes en transacciones con tarjetas de crédito, con el propósito de identificar características asociadas con operaciones fraudulentas y comprender su comportamiento dentro del conjunto de datos. Los patrones identificados se utilizan posteriormente como base para formular y evaluar reglas exploratorias de detección de fraude.
+El proceso comprende la adquisición, integración, limpieza, transformación, análisis exploratorio y visualización de los datos. A partir de los hallazgos obtenidos durante el EDA, se formulan reglas basadas en monto, horario y categoría comercial, cuyo desempeño se evalúa mediante métricas como precisión, recall, F1-Score y tasa de falsos positivos.
 ## Objetivo
 
 Explorar los datos transaccionales para identificar patrones asociados con operaciones fraudulentas y analizar cómo los hallazgos obtenidos mediante el EDA pueden orientar la formulación de reglas exploratorias de detección de fraude.
